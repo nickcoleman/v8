@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import { ArrowDown, ArrowUp, ArrowsVertical } from '@carbon/icons-react';
 
 import {
@@ -21,17 +21,24 @@ import {
 const STATIC_ARRAY = [];
 
 export const LocalTable = ({ columns: tableColumns, data: tableData, tableHeight, responsive }) => {
+  const [sorting, setSorting] = React.useState([]);
   const columns = React.useMemo(() => {
     return tableColumns || STATIC_ARRAY;
   }, [tableColumns]);
+
   const data = React.useMemo(() => {
     return tableData || STATIC_ARRAY;
   }, [tableData]);
 
   const table = useReactTable({
-    columns,
     data,
+    columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (

@@ -10,7 +10,7 @@ const statusMap = {
 };
 
 export const personColumns = [
-  columnHelper.accessor('learner', {
+  columnHelper.accessor('lastName', {
     id: 'lastName',
     cell: ({ row }) => (
       <div style={{ display: 'flex', alignContent: 'start' }}>
