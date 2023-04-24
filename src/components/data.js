@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 export const person = [
   {
     firstName: 'tanner',
@@ -24,3 +26,31 @@ export const person = [
     progress: 10,
   },
 ];
+
+const range = (len) => {
+  const arr = [];
+  for (let i = 0; i < len; i++) {
+    arr.push(i);
+  }
+  return arr;
+};
+
+const newPerson = () => {
+  const statusChance = Math.random();
+  return {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    progress: Math.floor(Math.random() * 100),
+    status: statusChance > 0.75 ? 'completed' : statusChance > 0.5 ? 'in-progress' : statusChance > 0.25 ? 'started' : 'assigned',
+  };
+};
+
+export function makePersonData(len = 5553) {
+  return range(len).map(() => {
+    return {
+      ...newPerson(),
+      children: range(10).map(newPerson),
+    };
+  });
+}

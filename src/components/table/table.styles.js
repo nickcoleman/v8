@@ -90,3 +90,12 @@ export const TableCell = styled.td`
   padding: 15px 16px;
   background-color: ${colors.white};
 `;
+
+export const ArrowWrapper = styled.span`
+  float: right;
+`;
+
+export const VerticalArrowsWrapper = styled.span`
+  float: right;
+  visibility: hidden;
+`;
